@@ -5,9 +5,8 @@ import (
 
 	"github.com/EwanGreer/scaleable-e-commerce/internal/queues/kafka"
 	"github.com/EwanGreer/scaleable-e-commerce/internal/slogger"
+	"github.com/EwanGreer/scaleable-e-commerce/services/users/api"
 	"github.com/EwanGreer/scaleable-e-commerce/services/users/config"
-	"github.com/EwanGreer/scaleable-e-commerce/services/users/service"
-	"github.com/EwanGreer/scaleable-e-commerce/services/users/service/api"
 )
 
 func main() {
@@ -15,11 +14,11 @@ func main() {
 
 	cfg := config.New()
 
-	// taking the first index of topics for now. Not sure if a record should be produced to multiple topics
+	// Taking the first index of topics for now. Not sure if a record should be produced to multiple topics
 	producer := kafka.NewProducer(cfg.Kafka.Producer.Topics[0], cfg.Kafka.Producer.Brokers)
 
 	handler := api.New()
 
-	svc := service.New(cfg, producer, handler)
+	svc := NewService(cfg, producer, handler)
 	svc.Start()
 }

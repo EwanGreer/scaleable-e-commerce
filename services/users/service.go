@@ -1,4 +1,4 @@
-package service
+package main
 
 import (
 	"fmt"
@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"github.com/EwanGreer/scaleable-e-commerce/internal/queues/kafka"
+	"github.com/EwanGreer/scaleable-e-commerce/services/users/api"
 	"github.com/EwanGreer/scaleable-e-commerce/services/users/config"
-	"github.com/EwanGreer/scaleable-e-commerce/services/users/service/api"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -20,7 +20,7 @@ type UserService struct {
 	Port        string
 }
 
-func New(cfg *config.AppConfig, producer kafka.Producer, h *api.Handler) *UserService {
+func NewService(cfg *config.AppConfig, producer kafka.Producer, h *api.Handler) *UserService {
 	return &UserService{
 		ServiceName: cfg.ServiceName,
 		Producer:    producer,

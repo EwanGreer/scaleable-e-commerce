@@ -2,7 +2,9 @@ package config
 
 import (
 	"log"
+	"os"
 
+	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
 )
 
@@ -22,8 +24,10 @@ type AppConfig struct {
 
 var v = viper.New()
 
-func New(env string) *AppConfig {
-	v.SetConfigName("development")
+func New() *AppConfig {
+	_ = godotenv.Load()
+
+	v.SetConfigName(os.Getenv("ENV"))
 	v.AddConfigPath("./config")
 	v.SetConfigType("toml")
 

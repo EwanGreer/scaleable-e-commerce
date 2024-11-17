@@ -3,6 +3,7 @@ module github.com/EwanGreer/scaleable-e-commerce
 go 1.23.2
 
 require (
+	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/spf13/viper v1.19.0
 	github.com/twmb/franz-go v1.18.0

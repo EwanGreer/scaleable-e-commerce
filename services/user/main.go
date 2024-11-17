@@ -5,8 +5,8 @@ import (
 
 	"github.com/EwanGreer/scaleable-e-commerce/internal/queues/kafka"
 	"github.com/EwanGreer/scaleable-e-commerce/internal/slogger"
-	"github.com/EwanGreer/scaleable-e-commerce/services/users/api"
-	"github.com/EwanGreer/scaleable-e-commerce/services/users/config"
+	"github.com/EwanGreer/scaleable-e-commerce/services/user/api"
+	"github.com/EwanGreer/scaleable-e-commerce/services/user/config"
 )
 
 func main() {

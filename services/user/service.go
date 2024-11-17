@@ -1,13 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"log/slog"
 	"os"
 
 	"github.com/EwanGreer/scaleable-e-commerce/internal/queues/kafka"
-	"github.com/EwanGreer/scaleable-e-commerce/services/users/api"
-	"github.com/EwanGreer/scaleable-e-commerce/services/users/config"
+	"github.com/EwanGreer/scaleable-e-commerce/services/user/api"
+	"github.com/EwanGreer/scaleable-e-commerce/services/user/config"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -36,7 +35,7 @@ func (s *UserService) Start() {
 
 	MountRoutes(e, s.handler)
 
-	if err := e.Start(fmt.Sprintf("%s%s", s.ListenAddr, s.Port)); err != nil {
+	if err := e.Start(s.ListenAddr + s.Port); err != nil {
 		slog.Error(err.Error())
 		os.Exit(1)
 	}
@@ -47,7 +46,7 @@ func MountRoutes(e *echo.Echo, h *api.Handler) {
 	e.Use(middleware.RequestID())
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-	// TODO: jwt auth
+	// TODO: JWT auth
 
 	api := e.Group("/api")
 	v1 := api.Group("/v1")

@@ -8,6 +8,12 @@ import (
 
 type AppConfig struct {
 	ServiceName string `mapstructure:"SERVICE_NAME"`
+	Kafka       struct {
+		Producer struct {
+			Brokers []string `mapstructure:"BROKERS"`
+			Topics  []string `mapstructure:"TOPICS"`
+		} `mapstructure:"producer"`
+	} `mapstructure:"kafka"`
 }
 
 var v = viper.New()

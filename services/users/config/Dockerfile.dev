@@ -6,13 +6,8 @@ WORKDIR /app/services/users
 # Install Air for live reloading
 RUN go install github.com/air-verse/air@latest
 
-# Copy go.mod and go.sum to /app
 COPY go.mod go.sum /app/
 
-# Copy the services/users/go.mod and go.sum to /app/services/users if they exist
-# If not, skip this step
-
-# Download dependencies
 RUN cd /app && go mod download
 
 # Copy the rest of the application code to /app

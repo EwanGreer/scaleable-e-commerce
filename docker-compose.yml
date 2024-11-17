@@ -32,7 +32,7 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_HOST_NAME: broker
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092 # POINT HERE TO POLL
       KAFKA_CREATE_TOPICS: "user_registrations_v1:1:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

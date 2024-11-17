@@ -1,1 +1,6 @@
-SERVICE_NAME="users"
+SERVICE_NAME = "users"
+
+[kafka]
+[kafka.producer]
+BROKERS = ["broker:9092"]
+TOPICS = ["user_registrations_v1"]

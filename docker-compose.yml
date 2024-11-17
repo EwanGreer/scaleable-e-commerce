@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: ./services/users/config/Dockerfile.dev
     ports:
-      - "1234:1234"
+      - "8000:8000"
     volumes:
       - ./services/users:/app/services/users
     networks:

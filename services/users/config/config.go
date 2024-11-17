@@ -8,7 +8,11 @@ import (
 
 type AppConfig struct {
 	ServiceName string `mapstructure:"SERVICE_NAME"`
-	Kafka       struct {
+	Server      struct {
+		ListenAddr string `mapstructure:"LISTEN_ADDR"`
+		Port       string `mapstructure:"PORT"`
+	} `mapstructure:"server"`
+	Kafka struct {
 		Producer struct {
 			Brokers []string `mapstructure:"BROKERS"`
 			Topics  []string `mapstructure:"TOPICS"`

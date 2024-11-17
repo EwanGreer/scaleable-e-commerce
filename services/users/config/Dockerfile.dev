@@ -14,7 +14,7 @@ RUN cd /app && go mod download
 COPY . /app
 
 # Expose port if necessary
-EXPOSE 1234
+EXPOSE 8000
 
 # Start the application with Air
 CMD ["air", "-c", "config/.air.toml"]

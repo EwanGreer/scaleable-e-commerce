@@ -4,3 +4,7 @@ SERVICE_NAME = "users"
 [kafka.producer]
 BROKERS = ["broker:9092"]
 TOPICS = ["user_registrations_v1"]
+
+[server]
+LISTEN_ADDR = "0.0.0.0"
+PORT = ":8000"

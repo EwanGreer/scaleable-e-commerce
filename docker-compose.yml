@@ -1,6 +1,6 @@
 services:
   users:
-    container_name: users_service
+    container_name: user_service
     build:
       context: .
       dockerfile: ./services/users/config/Dockerfile.dev
@@ -33,7 +33,7 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_HOST_NAME: broker
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092
-      KAFKA_CREATE_TOPICS: "users_registrations_v1:1:1"
+      KAFKA_CREATE_TOPICS: "user_registrations_v1:1:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 

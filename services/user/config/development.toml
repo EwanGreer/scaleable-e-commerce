@@ -1,4 +1,4 @@
-SERVICE_NAME = "users"
+SERVICE_NAME = "user"
 
 [kafka]
 [kafka.producer]

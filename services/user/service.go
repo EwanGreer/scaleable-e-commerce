@@ -55,9 +55,8 @@ func MountRoutes(e *echo.Echo, h *api.Handler) {
 		return e.JSON(200, echo.Map{"healthy": true})
 	})
 
-	/*
-	* GetUserById
-	* CreateUser
-	* UpdateUser
-	 */
+	v1.POST("/user", h.CreateUser)
+	v1.GET("/user/:userId", h.GetUserById)
+	v1.PUT("/user", h.UpdateUser)
+	v1.DELETE("/user/:userId", h.DeleteUser)
 }

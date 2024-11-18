@@ -1,8 +1,8 @@
 dev:
 	docker compose up
 
-users:
-	docker compose up users --build
+user:
+	docker compose up user --build
 
 unit-test:
 	go test -v ./...

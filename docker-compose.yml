@@ -1,13 +1,13 @@
 services:
-  users:
+  user:
     container_name: user_service
     build:
       context: .
-      dockerfile: ./services/users/config/Dockerfile.dev
+      dockerfile: ./services/user/config/Dockerfile.dev
     ports:
       - "8000:8000"
     volumes:
-      - ./services/users:/app/services/users
+      - ./services/user:/app/services/user
     networks:
       - local-kafka
 

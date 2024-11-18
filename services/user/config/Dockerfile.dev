@@ -1,7 +1,7 @@
 FROM golang:1.23-alpine
 
-# Set the working directory to /app/services/users
-WORKDIR /app/services/users
+# Set the working directory to /app/services/user
+WORKDIR /app/services/user
 
 # Install Air for live reloading
 RUN go install github.com/air-verse/air@latest

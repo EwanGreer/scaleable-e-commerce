@@ -7,6 +7,7 @@ import (
 	"github.com/EwanGreer/scaleable-e-commerce/internal/slogger"
 	"github.com/EwanGreer/scaleable-e-commerce/services/user/api"
 	"github.com/EwanGreer/scaleable-e-commerce/services/user/config"
+	"github.com/EwanGreer/scaleable-e-commerce/services/user/service"
 )
 
 func main() {
@@ -19,6 +20,6 @@ func main() {
 
 	handler := api.New()
 
-	svc := NewService(cfg, producer, handler)
+	svc := service.NewService(cfg, producer, handler)
 	svc.Start()
 }

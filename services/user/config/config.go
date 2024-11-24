@@ -25,7 +25,10 @@ type AppConfig struct {
 var v = viper.New()
 
 func New() *AppConfig {
-	_ = godotenv.Load()
+	err := godotenv.Load()
+	if err != nil {
+		log.Panic(err)
+	}
 
 	v.SetConfigName(os.Getenv("ENV"))
 	v.AddConfigPath("./config")
@@ -38,9 +41,9 @@ func New() *AppConfig {
 	}
 
 	var c AppConfig
-	err := v.Unmarshal(&c)
+	err = v.Unmarshal(&c)
 	if err != nil {
-		panic(err)
+		log.Panic(err)
 	}
 
 	return &c

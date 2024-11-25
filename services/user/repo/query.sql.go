@@ -151,11 +151,17 @@ func (q *Queries) GetUserByUsername(ctx context.Context, username string) (User,
 const listUsers = `-- name: ListUsers :many
 SELECT id, username, email, password_hash, first_name, last_name, created_at, updated_at, is_active, is_admin, last_login, profile_picture_url, bio, date_of_birth, phone_number, address FROM users
 ORDER BY created_at DESC
+LIMIT $1 OFFSET $2
 `
 
-// Fetch all users from the table
-func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
-	rows, err := q.db.Query(ctx, listUsers)
+type ListUsersParams struct {
+	Limit  int32
+	Offset int32
+}
+
+// Fetch a paginated list of users from the table
+func (q *Queries) ListUsers(ctx context.Context, arg ListUsersParams) ([]User, error) {
+	rows, err := q.db.Query(ctx, listUsers, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}

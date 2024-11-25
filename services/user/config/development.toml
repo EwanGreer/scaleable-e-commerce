@@ -8,3 +8,6 @@ TOPICS = ["user_registrations_v1"]
 [server]
 LISTEN_ADDR = "0.0.0.0"
 PORT = ":8000"
+
+[database]
+CONNECTION_STRING = "postgresql://postgres:example@user_db:5432/postgres"

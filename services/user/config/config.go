@@ -14,6 +14,9 @@ type AppConfig struct {
 		ListenAddr string `mapstructure:"LISTEN_ADDR"`
 		Port       string `mapstructure:"PORT"`
 	} `mapstructure:"server"`
+	Database struct {
+		ConnectionString string `mapstructure:"CONNECTION_STRING"`
+	} `mapstructure:"database"`
 	Kafka struct {
 		Producer struct {
 			Brokers []string `mapstructure:"BROKERS"`

@@ -10,6 +10,8 @@ services:
       - ./services/user:/app/services/user
     networks:
       - local-kafka
+    depends_on:
+      - user_db
 
   user_db:
     image: postgres
@@ -25,6 +27,10 @@ services:
     #      size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
       POSTGRES_PASSWORD: example
+    volumes:
+      - ./services/user/repo/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - local-kafka
 
   adminer:
     image: adminer

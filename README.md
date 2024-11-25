@@ -1,10 +1,12 @@
 # README
 
-A scaleable e-commerce API
+A scale-able e-commerce API
 
 ## Running
 
-To run all services in docker, including kafka etc.
+This project required `Docker` to run.
+
+To run all services in docker, including Kafka etc.
 
 ```bash
 make all

@@ -13,7 +13,7 @@ import (
 func main() {
 	slogger.InitGlobalSlogger(slog.LevelInfo)
 
-	cfg := config.New()
+	cfg := config.Load()
 
 	// Taking the first index of topics for now. Not sure if a record should be produced to multiple topics
 	producer := kafka.NewProducer(cfg.Kafka.Producer.Topics[0], cfg.Kafka.Producer.Brokers)

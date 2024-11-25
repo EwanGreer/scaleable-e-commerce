@@ -24,7 +24,7 @@ type AppConfig struct {
 
 var v = viper.New()
 
-func New() *AppConfig {
+func Load() *AppConfig {
 	err := godotenv.Load()
 	if err != nil {
 		log.Panic(err)

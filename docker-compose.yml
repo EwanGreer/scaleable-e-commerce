@@ -11,7 +11,7 @@ services:
     networks:
       - local-kafka
 
-  db:
+  user_db:
     image: postgres
     container_name: user_db
     restart: always

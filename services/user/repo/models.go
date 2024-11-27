@@ -9,20 +9,20 @@ import (
 )
 
 type User struct {
-	ID                int32
-	Username          string
-	Email             string
-	PasswordHash      string
-	FirstName         pgtype.Text
-	LastName          pgtype.Text
-	CreatedAt         pgtype.Timestamp
-	UpdatedAt         pgtype.Timestamp
-	IsActive          pgtype.Bool
-	IsAdmin           pgtype.Bool
-	LastLogin         pgtype.Timestamp
-	ProfilePictureUrl pgtype.Text
-	Bio               pgtype.Text
-	DateOfBirth       pgtype.Date
-	PhoneNumber       pgtype.Text
-	Address           []byte
+	ID                int32            `db:"id" json:"id"`
+	Username          string           `db:"username" json:"username"`
+	Email             string           `db:"email" json:"email"`
+	PasswordHash      string           `db:"password_hash" json:"password_hash"`
+	FirstName         pgtype.Text      `db:"first_name" json:"first_name"`
+	LastName          pgtype.Text      `db:"last_name" json:"last_name"`
+	CreatedAt         pgtype.Timestamp `db:"created_at" json:"created_at"`
+	UpdatedAt         pgtype.Timestamp `db:"updated_at" json:"updated_at"`
+	IsActive          pgtype.Bool      `db:"is_active" json:"is_active"`
+	IsAdmin           pgtype.Bool      `db:"is_admin" json:"is_admin"`
+	LastLogin         pgtype.Timestamp `db:"last_login" json:"last_login"`
+	ProfilePictureUrl pgtype.Text      `db:"profile_picture_url" json:"profile_picture_url"`
+	Bio               pgtype.Text      `db:"bio" json:"bio"`
+	DateOfBirth       pgtype.Date      `db:"date_of_birth" json:"date_of_birth"`
+	PhoneNumber       pgtype.Text      `db:"phone_number" json:"phone_number"`
+	Address           []byte           `db:"address" json:"address"`
 }

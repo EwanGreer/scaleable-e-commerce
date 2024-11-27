@@ -29,16 +29,16 @@ INSERT INTO users (
 `
 
 type CreateUserParams struct {
-	Username          string
-	Email             string
-	PasswordHash      string
-	FirstName         pgtype.Text
-	LastName          pgtype.Text
-	Bio               pgtype.Text
-	DateOfBirth       pgtype.Date
-	PhoneNumber       pgtype.Text
-	ProfilePictureUrl pgtype.Text
-	Address           []byte
+	Username          string      `db:"username" json:"username"`
+	Email             string      `db:"email" json:"email"`
+	PasswordHash      string      `db:"password_hash" json:"password_hash"`
+	FirstName         pgtype.Text `db:"first_name" json:"first_name"`
+	LastName          pgtype.Text `db:"last_name" json:"last_name"`
+	Bio               pgtype.Text `db:"bio" json:"bio"`
+	DateOfBirth       pgtype.Date `db:"date_of_birth" json:"date_of_birth"`
+	PhoneNumber       pgtype.Text `db:"phone_number" json:"phone_number"`
+	ProfilePictureUrl pgtype.Text `db:"profile_picture_url" json:"profile_picture_url"`
+	Address           []byte      `db:"address" json:"address"`
 }
 
 // Insert a new user into the users table
@@ -155,8 +155,8 @@ LIMIT $1 OFFSET $2
 `
 
 type ListUsersParams struct {
-	Limit  int32
-	Offset int32
+	Limit  int32 `db:"limit" json:"limit"`
+	Offset int32 `db:"offset" json:"offset"`
 }
 
 // Fetch a paginated list of users from the table
@@ -204,8 +204,8 @@ WHERE id = $1
 `
 
 type SetUserActiveStatusParams struct {
-	ID       int32
-	IsActive pgtype.Bool
+	ID       int32       `db:"id" json:"id"`
+	IsActive pgtype.Bool `db:"is_active" json:"is_active"`
 }
 
 // Update the active status of a user
@@ -242,14 +242,14 @@ RETURNING id, username, email, password_hash, first_name, last_name, created_at,
 `
 
 type UpdateUserParams struct {
-	ID                int32
-	FirstName         pgtype.Text
-	LastName          pgtype.Text
-	Bio               pgtype.Text
-	DateOfBirth       pgtype.Date
-	PhoneNumber       pgtype.Text
-	ProfilePictureUrl pgtype.Text
-	Address           []byte
+	ID                int32       `db:"id" json:"id"`
+	FirstName         pgtype.Text `db:"first_name" json:"first_name"`
+	LastName          pgtype.Text `db:"last_name" json:"last_name"`
+	Bio               pgtype.Text `db:"bio" json:"bio"`
+	DateOfBirth       pgtype.Date `db:"date_of_birth" json:"date_of_birth"`
+	PhoneNumber       pgtype.Text `db:"phone_number" json:"phone_number"`
+	ProfilePictureUrl pgtype.Text `db:"profile_picture_url" json:"profile_picture_url"`
+	Address           []byte      `db:"address" json:"address"`
 }
 
 // Update a user's information

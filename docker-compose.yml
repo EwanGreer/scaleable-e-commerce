@@ -13,6 +13,22 @@ services:
     depends_on:
       - user_db
 
+  notification:
+    container_name: notification
+    build:
+      context: .
+      dockerfile: ./services/notification/Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./services/notification:/app/services/notification
+    networks:
+      - app
+    depends_on:
+      - mongo
+      - minio
+
   user_db:
     image: postgres
     container_name: user_db
@@ -38,22 +54,6 @@ services:
     restart: always
     ports:
       - 8080:8080
-
-  notification:
-    container_name: notification
-    build:
-      context: .
-      dockerfile: ./services/notification/Dockerfile
-    restart: always
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./services/notification:/app/services/notification
-    networks:
-      - app
-    depends_on:
-      - mongo
-      - minio
 
   # local service to mimic s3
   minio:

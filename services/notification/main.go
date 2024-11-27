@@ -7,7 +7,6 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	echojwt "github.com/labstack/echo-jwt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
@@ -31,6 +30,8 @@ type AppConfig struct {
 
 func main() {
 	cfg := loadConfig()
+
+	log.Printf("%+v", cfg)
 
 	e := echo.New()
 	e.HideBanner = true
@@ -58,7 +59,7 @@ func MountRoutes(e *echo.Echo, h *emailer.Handler, cfg AppConfig) {
 		middleware.RequestID(),
 		middleware.Logger(),
 		middleware.Recover(),
-		echojwt.JWT([]byte(cfg.JWTSecretKey)),
+		// echojwt.JWT([]byte(cfg.JWTSecretKey)),
 	)
 
 	api := e.Group("/api")

@@ -45,7 +45,7 @@ func NewS3Config(endpoint string) (aws.Config, error) {
 		options = append(options, config.WithCredentialsProvider(aws.CredentialsProviderFunc(func(ctx context.Context) (aws.Credentials, error) {
 			return aws.Credentials{
 				AccessKeyID:     "minio",
-				SecretAccessKey: "miniominio",
+				SecretAccessKey: "miniosecret",
 			}, nil
 		})))
 	}

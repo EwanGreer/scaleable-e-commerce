@@ -46,9 +46,9 @@ services:
       dockerfile: ./services/notification/Dockerfile
     restart: always
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
-      - ./services/notification:/app
+      - ./services/notification:/app/services/notification
     networks:
       - app
     depends_on:

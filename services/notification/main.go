@@ -11,7 +11,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
-	"github.com/EwanGreer/services/notification/services/emailer"
+	"github.com/EwanGreer/scaleable-e-commerce/services/notification/services/emailer"
 	_ "github.com/a-h/templ"
 )
 

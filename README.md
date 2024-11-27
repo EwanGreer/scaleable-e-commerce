@@ -9,7 +9,7 @@ This project required `Docker` to run.
 To run all services in docker, including Kafka etc.
 
 ```bash
-make all
+docker compose up --build -d
 ```
 
 To run an individual service, and its deps

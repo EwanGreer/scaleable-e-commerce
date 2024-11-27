@@ -9,7 +9,7 @@ services:
     volumes:
       - ./services/user:/app/services/user
     networks:
-      - local-kafka
+      - app
     depends_on:
       - user_db
 
@@ -30,7 +30,7 @@ services:
     volumes:
       - ./services/user/repo/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     networks:
-      - local-kafka
+      - app
 
   adminer:
     image: adminer
@@ -39,13 +39,57 @@ services:
     ports:
       - 8080:8080
 
+  notification:
+    container_name: notification
+    build:
+      context: .
+      dockerfile: ./services/notification/Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./services/notification:/app
+    networks:
+      - app
+    depends_on:
+      - mongo
+      - minio
+
+  # local service to mimic s3
+  minio:
+    image: "bitnami/minio:latest"
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_DEFAULT_BUCKETS: mailer-emails:public,mailer-attachments:public
+    networks:
+      - app
+    volumes:
+      - minio_data:/bitnami/minio/data
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app
+
   zookeeper:
     image: wurstmeister/zookeeper
     container_name: zookeeper
     ports:
       - "2181:2181"
     networks:
-      - local-kafka
+      - app
 
   broker:
     image: wurstmeister/kafka:2.13-2.7.0
@@ -55,7 +99,7 @@ services:
     ports:
       - "9092:9092"
     networks:
-      - local-kafka
+      - app
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -73,12 +117,17 @@ services:
     ports:
       - "7777:8080"
     networks:
-      - local-kafka
+      - app
     environment:
       KAFKA_CLUSTERS_0_NAME: local
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: broker:9092
       KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
 
+volumes:
+  minio_data:
+    driver: local
+  mongo_data:
+
 networks:
-  local-kafka:
+  app:
     driver: bridge

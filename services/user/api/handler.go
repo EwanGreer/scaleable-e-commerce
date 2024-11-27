@@ -9,10 +9,10 @@ import (
 )
 
 type Handler struct {
-	DB *repo.Queries
+	DB repo.Querier
 }
 
-func NewHandler(queries *repo.Queries) *Handler {
+func NewHandler(queries repo.Querier) *Handler {
 	return &Handler{DB: queries}
 }
 
@@ -34,6 +34,19 @@ func (h *Handler) GetUserById(c echo.Context) error {
 	return c.JSON(200, user)
 }
 
-func (h *Handler) CreateUser(c echo.Context) error { return nil }
+func (h *Handler) CreateUser(c echo.Context) error {
+	var user repo.CreateUserParams // NOTE: is there an easy way to validate this with struct tags?
+
+	if err := c.Bind(&user); err != nil {
+		return err
+	}
+
+	u, err := h.DB.CreateUser(c.Request().Context(), user)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(200, map[string]any{"id": u.ID})
+}
 func (h *Handler) UpdateUser(c echo.Context) error { return nil }
 func (h *Handler) DeleteUser(c echo.Context) error { return nil }

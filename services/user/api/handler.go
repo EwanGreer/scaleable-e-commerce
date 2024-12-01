@@ -16,6 +16,11 @@ func NewHandler(queries repo.Querier) *Handler {
 	return &Handler{DB: queries}
 }
 
+func (h *Handler) Health(c echo.Context) error {
+	// TODO: call out to DB ping/health
+	return c.JSON(200, map[string]any{"healthy": true})
+}
+
 func (h *Handler) GetUserById(c echo.Context) error {
 	id, err := strconv.Atoi(c.Param("userId"))
 	if err != nil {
@@ -48,5 +53,6 @@ func (h *Handler) CreateUser(c echo.Context) error {
 
 	return c.JSON(200, map[string]any{"id": u.ID})
 }
+
 func (h *Handler) UpdateUser(c echo.Context) error { return nil }
 func (h *Handler) DeleteUser(c echo.Context) error { return nil }

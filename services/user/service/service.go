@@ -51,9 +51,11 @@ func MountRoutes(e *echo.Echo, h *api.Handler) {
 	api := e.Group("/api")
 	v1 := api.Group("/v1")
 
-	v1.GET("/health", func(e echo.Context) error {
-		return e.JSON(200, echo.Map{"healthy": true})
-	})
+	v1.GET("/ping", func(c echo.Context) error { return nil })
+
+	// TODO: this should return more than just healthy. It should be derived from calling other services and should return a JSON blog of dependent health statuses
+	// TODO: should be a protected route as it exposes architecture details
+	v1.GET("/health", h.Health)
 
 	v1.POST("/user", h.CreateUser)
 	v1.GET("/user/:userId", h.GetUserById)

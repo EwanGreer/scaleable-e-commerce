@@ -9,3 +9,6 @@ unit-test:
 
 generate-sql:
 	sqlc -f ./services/user/repo/sqlc.yaml generate
+
+test:
+	go test ./... -v
